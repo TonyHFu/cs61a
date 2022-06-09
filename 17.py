@@ -55,3 +55,30 @@ def map(f, lnk):
   lnk.first = f(lnk.first)
   map(f, lnk.rest)
 
+class Tree:
+  def __init__(self, label, branches=[]):
+    for b in branches:
+      assert isinstance(b, Tree)
+    self.label = label
+    self.branches = branches
+  
+  def is_leaf(self):
+    return not self.branches
+
+def print_tree(t, indent=0):
+  print(" " * indent, t.label)
+  for b in t.branches:
+    print_tree(b, indent + 1)
+
+def tree_map(f, t):
+  t.label = f(t.label)
+  for b in t.branches:
+    map(f, b)
+
+def prune(t, x):
+  """
+  >>> x = Tree(3, [Tree(1, [Tree(0), Tree(1)]), Tree(2, [Tree(1), Tree(1, [Tree(0), Tree(1)])])])
+  >>> 
+  >>> x
+  """
+  
